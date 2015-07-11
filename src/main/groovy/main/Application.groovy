@@ -12,8 +12,13 @@ import perfcomp.groovy.Child as GChild
 import perfcomp.groovy.Dog as GDog
 import perfcomp.groovy.Parent as GParent
 import perfcomp.groovy.Person as GPerson
+import perfcomp.groovy.StaticChild as GSChild
+import perfcomp.groovy.StaticDog as GSDog
+import perfcomp.groovy.StaticParent as GSParent
+import perfcomp.groovy.StaticPerson as GSPerson
 
 import static perfcomp.groovy.Util.printName as gPrintName
+import static perfcomp.groovy.StaticUtil.printName as gsPrintName
 
 /**
  * Created by rahul on 7/10/15.
@@ -121,27 +126,27 @@ class Application {
     private static void groovyStatic(int count) {
 
         // Create new Parent and Child objects but use Person type reference.
-        GPerson parent1 = new GParent('parent1')
-        GPerson child1 = new GChild('child1')
+        GSPerson parent1 = new GSParent('parent1')
+        GSPerson child1 = new GSChild('child1')
         count.times {
-            assert 'printName(Person): parent1' == gPrintName(parent1)
-            assert 'printName(Child): child1' == gPrintName(child1)  // This is not what Java would do!!
-            assert 'printName(Person): child1' == gPrintName(child1 as GPerson)
+            assert 'printName(StaticPerson): parent1' == gsPrintName(parent1)
+            assert 'printName(StaticChild): child1' == gsPrintName(child1)  // This is not what Java would do!!
+            assert 'printName(StaticPerson): child1' == gsPrintName(child1 as GSPerson)
             // Same as what Java would do with printName(child1)
         }
 
         // Create objects with type reference is equal to object.
-        GParent parent2 = new GParent('parent2')
-        GChild child2 = new GChild('child2')
+        GSParent parent2 = new GSParent('parent2')
+        GSChild child2 = new GSChild('child2')
 
         count.times {
-            assert 'printName(Person): parent2' == gPrintName(parent2)
-            assert 'printName(Child): child2' == gPrintName(child2)
+            assert 'printName(StaticPerson): parent2' == gsPrintName(parent2)
+            assert 'printName(StaticChild): child2' == gsPrintName(child2)
         }
 
         // Use class outside Person hierarchy.
         count.times {
-            assert 'printName(p): buck' == gPrintName(new GDog('buck'))
+            assert 'printName(StaticDog): buck' == gsPrintName(new GSDog('buck'))
         }
     }
 }
