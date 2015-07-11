@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
+apply plugin: 'application'
 
 sourceCompatibility = 1.5
 
@@ -15,3 +16,5 @@ dependencies {
     compile 'org.gperfutils:gprof:0.3.1-groovy-2.4'
     compile 'org.gperfutils:gbench:0.4.3-groovy-2.4'
 }
+
+mainClassName = "main.Application"

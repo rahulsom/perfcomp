@@ -1,6 +1,5 @@
 package perfcomp.groovy
 
-import groovy.transform.Immutable
 import groovy.transform.TupleConstructor
 
 /**
@@ -16,8 +15,8 @@ class Parent extends Person {
 class Child extends Person {
     Child(String name) {super(name)}
 }
-@TupleConstructor
 class Dog {
+    Dog(String name) {this.name = name}
     String name
 }
 class Util {

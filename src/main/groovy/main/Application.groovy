@@ -1,8 +1,6 @@
 package main
 
 import groovy.transform.CompileStatic
-import groovyx.gbench.BenchmarkBuilder
-
 import perfcomp.java.Child as JChild
 import perfcomp.java.Dog as JDog
 import perfcomp.java.Parent as JParent
@@ -21,15 +19,18 @@ import static perfcomp.groovy.Util.printName as gPrintName
  * Created by rahul on 7/10/15.
  */
 class Application {
+
+    public static final int LOOP_SIZE = 300
+
+    @SuppressWarnings("UnnecessaryQualifiedReference")
     public static void main(String[] args) {
 
-        new BenchmarkBuilder().run {
-            'JApplication.java' {JApplication.java(300)}
-            'JApplication.groovy' {JApplication.groovy(300)}
-            'Application.java' {Application.java(300)}
-            'Application.javaStatic' {Application.javaStatic(300)}
-            'Application.groovy' {Application.groovy(300)}
-            'Application.groovyStatic' {Application.groovyStatic(300)}
+        benchmark {
+            'JApplication.java' {JApplication.java(LOOP_SIZE)}
+            'Application.java' {Application.java(LOOP_SIZE)}
+            'Application.javaStatic' {Application.javaStatic(LOOP_SIZE)}
+            'Application.groovy' {Application.groovy(LOOP_SIZE)}
+            'Application.groovyStatic' {Application.groovyStatic(LOOP_SIZE)}
         }.prettyPrint()
 
     }
@@ -60,6 +61,7 @@ class Application {
             assert 'printName(p): buck' == jPrintName(new JDog('buck'))
         }
     }
+
     @CompileStatic
     private static void javaStatic(int count) {
 
@@ -87,6 +89,7 @@ class Application {
             assert 'printName(p): buck' == jPrintName(new JDog('buck'))
         }
     }
+
     private static void groovy(int count) {
 
         // Create new Parent and Child objects but use Person type reference.
@@ -113,6 +116,7 @@ class Application {
             assert 'printName(p): buck' == gPrintName(new GDog('buck'))
         }
     }
+
     @CompileStatic
     private static void groovyStatic(int count) {
 
