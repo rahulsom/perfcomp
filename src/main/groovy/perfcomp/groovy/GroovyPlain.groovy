@@ -7,31 +7,46 @@ import groovy.transform.TupleConstructor
  * Created by rahul on 7/10/15.
  */
 @TupleConstructor
-@CompileStatic
 class Person {
     String name
 }
-@CompileStatic
 class Parent extends Person {
     Parent(String name) { super(name) }
 }
-@CompileStatic
 class Child extends Person {
     Child(String name) {super(name)}
 }
-@TupleConstructor
-@CompileStatic
 class Dog {
     String name
-
-    Dog(String name) {
-        this.name = name
-    }
+    Dog(String name) {this.name = name}
 }
 class Util {
-    @CompileStatic
     static String printName(Person person) { "printName(Person): $person.name" }
-    @CompileStatic
     static String printName(Child child) { "printName(Child): $child.name" }
     static String printName(p) { "printName(p): $p.name" }
+}
+
+@CompileStatic
+@TupleConstructor
+class StaticPerson {
+    String name
+}
+@CompileStatic
+class StaticParent extends StaticPerson {
+    StaticParent(String name) { super(name) }
+}
+@CompileStatic
+class StaticChild extends StaticParent {
+    StaticChild(String name) {super(name)}
+}
+@CompileStatic
+class StaticDog {
+    String name
+    StaticDog(String name) {this.name = name}
+}
+@CompileStatic
+class StaticUtil {
+    static String printName(StaticPerson person) { "printName(StaticPerson): $person.name" }
+    static String printName(StaticChild child) { "printName(StaticChild): $child.name" }
+    static String printName(StaticDog dog) { "printName(StaticDog): $dog.name" }
 }
